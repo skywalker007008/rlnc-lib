@@ -4,6 +4,6 @@ project(rlnc)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES main.cpp
-        gf.c
-        gf.h)
+        gf.cpp
+        gf.h codec.h codec.cpp)
 add_executable(rlnc ${SOURCE_FILES})

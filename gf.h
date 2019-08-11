@@ -31,15 +31,20 @@ http://www.sensor608.com/gf.html
 #ifndef _GF_H
 #define _GF_H
 
+#include <stdint-gcc.h>
+
 #ifdef _cplusplus
 extern "C" {	
 #endif
 
-typedef unsigned int GFType;
+typedef uint16_t GFType;
+
+extern GFType prim_poly[13];
 extern GFType* table_alpha;
 extern GFType* table_index;
 extern GFType** table_mul;
 extern GFType** table_div;
+extern int gFieldSize;
 
 void gf_init(unsigned int m, unsigned int prim); 
 void gf_uninit();

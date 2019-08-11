@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/buaa/CLionProjects/rlnc/codec.cpp
+cstdint
+-
+iostream
+-
+codec.h
+/home/buaa/CLionProjects/rlnc/codec.h
+
+/home/buaa/CLionProjects/rlnc/codec.h
+malloc.h
+-
+cstring
+-
+cstdlib
+-
+gf.h
+/home/buaa/CLionProjects/rlnc/gf.h
+
+/home/buaa/CLionProjects/rlnc/gf.cpp
+gf.h
+/home/buaa/CLionProjects/rlnc/gf.h
+stdio.h
+/home/buaa/CLionProjects/rlnc/stdio.h
+stdlib.h
+-
+malloc.h
+-
+
+/home/buaa/CLionProjects/rlnc/gf.h
+stdint-gcc.h
+-
+
+/home/buaa/CLionProjects/rlnc/main.cpp
+iostream
+-
+codec.h
+/home/buaa/CLionProjects/rlnc/codec.h
+
