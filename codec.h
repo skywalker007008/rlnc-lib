@@ -20,26 +20,32 @@
 #define LOW_8(a) ((a) & 0xFF)
 
 namespace rlnc {
+    /*class Codec {
+    public:
+        Codec();
+        ~Codec();
+        void set_message(char* message);
+
+    };*/
     constexpr int kPacketSize = 64;
     /*!
      * Encode a packet into a encode_format
      * @param packet the origin message packet
      * @param length the length of the message packet
-     * @param iter_time the time of the encode_iter_time
      * @param buf the buf to receive the encoded result
-     * @return the random coefficient
+     * @return the random coefficient list
      */
-    GFType encode(char* packet, int length, int iter_time, char* buf);
+    GFType** encode(char* packet, int length, char* buf);
 
     /*!
      * Decode a packet into a decode_format
      * @param packet the encoded message packet
      * @param length the length of the message packet
-     * @param iter_time the time of the encode_iter_time
      * @param buf the receiver of the decode msg
-     * @param rand the random coefficient used to encode
+     * @param rand_list the random coefficient used to encode
+     * @param vec_size the size of the msg
      */
-    void decode(char* packet, int length, int iter_time, char* buf, GFType rand);
+    void decode(char* packet, int length, char* buf, GFType* rand_list, int vec_size);
 
     /*!
      * test_print

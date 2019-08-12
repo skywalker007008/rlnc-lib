@@ -169,3 +169,39 @@ GFType gf_exp(GFType a, GFType n)
 	return table_alpha[table_index[a]*n%(gFieldSize-1)];
 }
 
+GFType** gauss_inv(GFType** gf_list, int vec_size) {
+    GFType** dest_mat = (GFType**)malloc(vec_size * sizeof(GFType*));
+    GFType** orig_mat = (GFType**)malloc(vec_size * sizeof(GFType*));
+    GFType rand;
+
+    // TODO: Init a std matrix and copy the original matrix
+    for (int i = 0; i < vec_size; i++) {
+        dest_mat[i] = (GFType*)malloc(vec_size * sizeof(GFType));
+        orig_mat[i] = (GFType*)malloc(vec_size * sizeof(GFType));
+        for (int j = 0; j < vec_size; j++) {
+            orig_mat[i][j] = gf_list[i][j];
+            dest_mat[i][j] = (i == j ? (GFType)1 : (GFType)0);
+        }
+    }
+
+    for (int i = 0; i < vec_size; i++) {
+        // TODO: Turn the [i][i] into 1(change both orig and dest)
+        for (int j = 0; j < vec_size; j++) {
+            orig_mat[i][j] = gf_div(orig_mat[i][j], orig_mat[i][i]);
+            dest_mat[i][j] = gf_div(dest_mat[i][j], orig_mat[i][i]);
+        }
+        // TODO: Turn the column[i] into 1,0,0,0......(change both orig and dest)
+        for (int t = i + 1; t < vec_size; t++) {
+            for (int j = i; j < vec_size; j++) {
+                orig_mat[t][j] = gf_sub(orig_mat[t][j], orig_mat[t][i]);
+                dest_mat[t][j] = gf_sub(dest_mat[t][j], orig_mat[t][i]);
+            }
+        }
+        // TODO: Turn the row[i] into 1,0,0,0......(change only dest)
+        for (int j = i + 1; j < vec_size; j++) {
+            dest_mat[i][j] = gf_sub(dest_mat[i][j], orig_mat[i][j]);
+        }
+    }
+
+}
+

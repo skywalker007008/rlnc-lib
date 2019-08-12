@@ -63,6 +63,14 @@ void gf_print();
 #define  gf_inv(a)		(table_div[1][a])
 GFType gf_exp(GFType a, GFType n);
 
+/*!
+ * return a gauss_inv matrix by the certain random coef
+ * @param gf_list the rand_coef
+ * @param vec_size the size of this vector_list
+ * @return the inv matrix
+ */
+GFType** gauss_inv(GFType** gf_list, int vec_size);
+
 #ifdef _cplusplus
 }	
 #endif

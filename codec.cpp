@@ -9,33 +9,36 @@
  * 
  */
 
-GFType RLNC encode(char* packet, int length, int iter_time, char* buf) {
-    // char* buf = (char*)malloc(length * sizeof(char));
-    // int windows = ROUND(length, kPacketSize) / kPacketSize;
-    // memcpy(buf, packet, length * sizeof(char));
+GFType** RLNC encode(char* packet, int length, char* buf) {
+    int vec_size = length / kPacketSize;
     memset(buf, 0, length * sizeof(char));
-    GFType rand = std::rand() % gFieldSize;
-    std::cout << "rand:" << rand << "\n";
-    for (int i = 0; i < iter_time; i++) {
-        for (int j = 0; j < length; j++) {
-            printf("%x ", (uint8_t)buf[j]);
-            buf[j] = gf_mul(rand, (uint8_t)packet[j]);
-            // printf("%d %d\n", HIGH_8(result), LOW_8(result));
-            // std::cout << gf_mul(HIGH_8(result), LOW_8(result)) << "\n";
-            printf("%x\n", (uint8_t)buf[j]);
+    GFType** rand_list = (GFType**)malloc(vec_size * sizeof(GFType*));
+    GFType rand;
+
+    for (int i = 0; i < vec_size; i++) {
+        for (int t = 0; t < vec_size; t++) {
+            rand = std::rand() % gFieldSize;
+            std::cout << "rand:" << rand << "\n";
+            for (int j = 0; j < kPacketSize; j++) {
+                buf[i * kPacketSize + j] ^= gf_mul(rand, (uint8_t) packet[t * kPacketSize + j]);
+                printf("%x\n", (uint8_t) buf[i * kPacketSize + j]);
+            }
         }
+        rand_list[i] = rand;
     }
-    return rand;
+    return rand_list;
 }
 
-void RLNC decode(char* packet, int length, int iter_time, char* buf, GFType rand) {
-    // memcpy(buf, packet, length * sizeof (char));
+void RLNC decode(char* packet, int length, char* buf, GFType* rand_list, int vec_size) {
     memset(buf, 0, length * sizeof(char));
-    for (int i = 0; i < iter_time; i++) {
-        for (int j = 0; j < length; j++) {
-            printf("%x ", (uint8_t)packet[j]);
-            buf[j] = gf_mul(gf_inv(rand), (uint8_t)packet[j]);
-            printf("%x\n", (uint8_t)buf[j]);
+    GFType rand;
+    for (int i = 0; i < vec_size; i++) {
+        rand = rand_list[vec_size - i - 1];
+        for (int t = 0; t < vec_size; t++) {
+            for (int j = 0; j < kPacketSize; j++) {
+                buf[i * kPacketSize + j] ^= gf_mul(gf_inv(rand), (uint8_t) packet[t * kPacketSize + j]);
+                printf("%x\n", (uint8_t) buf[i * kPacketSize + j]);
+            }
         }
     }
 }

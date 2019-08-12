@@ -3,7 +3,7 @@
 #include "codec.h"
 
 int main() {
-    GFType rand1, rand2, rand3;
+    GFType *rand1, *rand2, *rand3;
     char* encode_buf1 = (char*)malloc(128 * sizeof(char));
     char* encode_buf2 = (char*)malloc(128 * sizeof(char));
     char* encode_buf3 = (char*)malloc(128 * sizeof(char));
@@ -16,23 +16,23 @@ int main() {
         return 0;
     }
     // gf_print();
-    // RLNC print_mul();
+    RLNC print_mul();
     char packet[128] = "This is the test code. "
             "And encode and decode this message to test the result right or not";
     RLNC print(packet);
-    rand1 = RLNC encode(packet, 128, 1, encode_buf1);
+    rand1 = RLNC encode(packet, 128, encode_buf1);
     std::cout << "Encode1 Finished\n";
     RLNC print(encode_buf1);
 
-    rand2 = RLNC encode(encode_buf1, 128, 1, encode_buf2);
+    /*rand2 = RLNC encode(encode_buf1, 128, encode_buf2);
     std::cout << "Encode2 Finished\n";
     RLNC print(encode_buf2);
 
-    rand3 = RLNC encode(encode_buf2, 128, 1, encode_buf3);
+    rand3 = RLNC encode(encode_buf2, 128, encode_buf3);
     std::cout << "Encode3 Finished\n";
-    RLNC print(encode_buf3);
+    RLNC print(encode_buf3);*/
 
-    RLNC decode(encode_buf3, 128, 1, decode_buf, gf_mul(gf_mul(rand1, rand2), rand3));
+    RLNC decode(encode_buf1, 128, decode_buf, rand1, 2);
     std::cout << "Decode Finished\n";
     RLNC print(decode_buf);
 
