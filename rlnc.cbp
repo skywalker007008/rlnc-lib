@@ -99,6 +99,12 @@
 		<Unit filename="/home/buaa/CLionProjects/rlnc/main.cpp">
 			<Option target="rlnc"/>
 		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/rlnc/test_codec.cpp">
+			<Option target="rlnc"/>
+		</Unit>
+		<Unit filename="/home/buaa/CLionProjects/rlnc/test_codec.h">
+			<Option target="rlnc"/>
+		</Unit>
 		<Unit filename="/home/buaa/CLionProjects/rlnc/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

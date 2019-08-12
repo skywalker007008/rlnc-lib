@@ -9,13 +9,13 @@
 /home/buaa/CLionProjects/rlnc/codec.cpp
 cstdint
 -
-iostream
--
 codec.h
 /home/buaa/CLionProjects/rlnc/codec.h
 
 /home/buaa/CLionProjects/rlnc/codec.h
 malloc.h
+-
+iostream
 -
 cstring
 -
@@ -33,6 +33,8 @@ stdlib.h
 -
 malloc.h
 -
+test_codec.h
+/home/buaa/CLionProjects/rlnc/test_codec.h
 
 /home/buaa/CLionProjects/rlnc/gf.h
 stdint-gcc.h
@@ -41,6 +43,14 @@ stdint-gcc.h
 /home/buaa/CLionProjects/rlnc/main.cpp
 iostream
 -
+test_codec.h
+/home/buaa/CLionProjects/rlnc/test_codec.h
+
+/home/buaa/CLionProjects/rlnc/test_codec.cpp
+test_codec.h
+/home/buaa/CLionProjects/rlnc/test_codec.h
+
+/home/buaa/CLionProjects/rlnc/test_codec.h
 codec.h
 /home/buaa/CLionProjects/rlnc/codec.h
 

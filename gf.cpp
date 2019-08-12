@@ -31,6 +31,7 @@ http://www.sensor608.com/gf.html
 #include "stdio.h"
 #include <stdlib.h> 
 #include <malloc.h>
+#include "test_codec.h"
 
 //
 GFType gfmul(GFType a, GFType b);
@@ -173,7 +174,7 @@ GFType** gauss_inv(GFType** gf_list, int vec_size) {
     GFType** dest_mat = (GFType**)malloc(vec_size * sizeof(GFType*));
     GFType** orig_mat = (GFType**)malloc(vec_size * sizeof(GFType*));
     GFType rand;
-
+    GFType temp;
     // TODO: Init a std matrix and copy the original matrix
     for (int i = 0; i < vec_size; i++) {
         dest_mat[i] = (GFType*)malloc(vec_size * sizeof(GFType));
@@ -183,25 +184,50 @@ GFType** gauss_inv(GFType** gf_list, int vec_size) {
             dest_mat[i][j] = (i == j ? (GFType)1 : (GFType)0);
         }
     }
+    RLNC print_mat(orig_mat, vec_size);
+    RLNC print_mat(dest_mat, vec_size);
 
+    // TODO: Turn the mat into lower-triangle-matrix
     for (int i = 0; i < vec_size; i++) {
         // TODO: Turn the [i][i] into 1(change both orig and dest)
+        temp = orig_mat[i][i];
         for (int j = 0; j < vec_size; j++) {
-            orig_mat[i][j] = gf_div(orig_mat[i][j], orig_mat[i][i]);
-            dest_mat[i][j] = gf_div(dest_mat[i][j], orig_mat[i][i]);
+            dest_mat[i][j] = gf_div(dest_mat[i][j], temp);
+            orig_mat[i][j] = gf_div(orig_mat[i][j], temp);
+
         }
+        RLNC print_mat(orig_mat, vec_size);
+        RLNC print_mat(dest_mat, vec_size);
         // TODO: Turn the column[i] into 1,0,0,0......(change both orig and dest)
         for (int t = i + 1; t < vec_size; t++) {
-            for (int j = i; j < vec_size; j++) {
-                orig_mat[t][j] = gf_sub(orig_mat[t][j], orig_mat[t][i]);
-                dest_mat[t][j] = gf_sub(dest_mat[t][j], orig_mat[t][i]);
+            temp = orig_mat[t][i];
+            for (int j = 0; j < vec_size; j++) {
+                dest_mat[t][j] = gf_sub(dest_mat[t][j], gf_mul(temp, dest_mat[i][j]));
+                orig_mat[t][j] = gf_sub(orig_mat[t][j], gf_mul(temp, orig_mat[i][j]));
             }
         }
-        // TODO: Turn the row[i] into 1,0,0,0......(change only dest)
-        for (int j = i + 1; j < vec_size; j++) {
-            dest_mat[i][j] = gf_sub(dest_mat[i][j], orig_mat[i][j]);
-        }
+        RLNC print_mat(orig_mat, vec_size);
+        RLNC print_mat(dest_mat, vec_size);
     }
+    // TODO: Change the mat into standard-matrix
+    for (int i = vec_size - 1; i >= 0; i--) {
+        for (int j = i - 1; j >= 0; j--) {
+            temp = orig_mat[j][i];
+            for (int t = 0; t < vec_size; t++) {
+                orig_mat[j][t] = gf_sub(orig_mat[j][t], gf_mul(temp, orig_mat[i][t]));
+                dest_mat[j][t] = gf_sub(dest_mat[j][t], gf_mul(temp, dest_mat[i][t]));
+            }
+        }
+        RLNC print_mat(orig_mat, vec_size);
+        RLNC print_mat(dest_mat, vec_size);
+    }
+
+    // TODO: free orig_mat
+    for (int i = 0; i < vec_size; i++) {
+        free(orig_mat[i]);
+    }
+    free(orig_mat);
+    return dest_mat;
 
 }
 

@@ -32,6 +32,7 @@ http://www.sensor608.com/gf.html
 #define _GF_H
 
 #include <stdint-gcc.h>
+// #include "test_codec.h"
 
 #ifdef _cplusplus
 extern "C" {	

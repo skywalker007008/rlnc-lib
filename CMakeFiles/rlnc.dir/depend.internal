@@ -6,9 +6,17 @@ CMakeFiles/rlnc.dir/codec.cpp.o
  /home/buaa/CLionProjects/rlnc/codec.h
  /home/buaa/CLionProjects/rlnc/gf.h
 CMakeFiles/rlnc.dir/gf.cpp.o
+ /home/buaa/CLionProjects/rlnc/codec.h
  /home/buaa/CLionProjects/rlnc/gf.cpp
  /home/buaa/CLionProjects/rlnc/gf.h
+ /home/buaa/CLionProjects/rlnc/test_codec.h
 CMakeFiles/rlnc.dir/main.cpp.o
  /home/buaa/CLionProjects/rlnc/codec.h
  /home/buaa/CLionProjects/rlnc/gf.h
  /home/buaa/CLionProjects/rlnc/main.cpp
+ /home/buaa/CLionProjects/rlnc/test_codec.h
+CMakeFiles/rlnc.dir/test_codec.cpp.o
+ /home/buaa/CLionProjects/rlnc/codec.h
+ /home/buaa/CLionProjects/rlnc/gf.h
+ /home/buaa/CLionProjects/rlnc/test_codec.cpp
+ /home/buaa/CLionProjects/rlnc/test_codec.h

@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /home/buaa/clion-2017.2.3/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E remove -f
+RM = /home/buaa/clion-2017.2.3/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/buaa/CLionProjects/rlnc
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/buaa/clion-2017.2.3/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/buaa/clion-2017.2.3/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -204,6 +204,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/rlnc.dir/build.make CMakeFiles/rlnc.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+test_codec.o: test_codec.cpp.o
+
+.PHONY : test_codec.o
+
+# target to build an object file
+test_codec.cpp.o:
+	$(MAKE) -f CMakeFiles/rlnc.dir/build.make CMakeFiles/rlnc.dir/test_codec.cpp.o
+.PHONY : test_codec.cpp.o
+
+test_codec.i: test_codec.cpp.i
+
+.PHONY : test_codec.i
+
+# target to preprocess a source file
+test_codec.cpp.i:
+	$(MAKE) -f CMakeFiles/rlnc.dir/build.make CMakeFiles/rlnc.dir/test_codec.cpp.i
+.PHONY : test_codec.cpp.i
+
+test_codec.s: test_codec.cpp.s
+
+.PHONY : test_codec.s
+
+# target to generate assembly for a file
+test_codec.cpp.s:
+	$(MAKE) -f CMakeFiles/rlnc.dir/build.make CMakeFiles/rlnc.dir/test_codec.cpp.s
+.PHONY : test_codec.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -222,6 +249,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... test_codec.o"
+	@echo "... test_codec.i"
+	@echo "... test_codec.s"
 .PHONY : help
 
 

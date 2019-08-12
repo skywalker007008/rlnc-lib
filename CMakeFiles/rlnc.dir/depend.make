@@ -5,10 +5,18 @@ CMakeFiles/rlnc.dir/codec.cpp.o: codec.cpp
 CMakeFiles/rlnc.dir/codec.cpp.o: codec.h
 CMakeFiles/rlnc.dir/codec.cpp.o: gf.h
 
+CMakeFiles/rlnc.dir/gf.cpp.o: codec.h
 CMakeFiles/rlnc.dir/gf.cpp.o: gf.cpp
 CMakeFiles/rlnc.dir/gf.cpp.o: gf.h
+CMakeFiles/rlnc.dir/gf.cpp.o: test_codec.h
 
 CMakeFiles/rlnc.dir/main.cpp.o: codec.h
 CMakeFiles/rlnc.dir/main.cpp.o: gf.h
 CMakeFiles/rlnc.dir/main.cpp.o: main.cpp
+CMakeFiles/rlnc.dir/main.cpp.o: test_codec.h
+
+CMakeFiles/rlnc.dir/test_codec.cpp.o: codec.h
+CMakeFiles/rlnc.dir/test_codec.cpp.o: gf.h
+CMakeFiles/rlnc.dir/test_codec.cpp.o: test_codec.cpp
+CMakeFiles/rlnc.dir/test_codec.cpp.o: test_codec.h
 

@@ -9,6 +9,7 @@
 #define RLNC_CODEC_H
 
 #include <malloc.h>
+#include <iostream>
 #include <cstring>
 #include <cstdlib>
 #include "gf.h"
@@ -27,7 +28,7 @@ namespace rlnc {
         void set_message(char* message);
 
     };*/
-    constexpr int kPacketSize = 64;
+    constexpr int kPacketSize = 32;
     /*!
      * Encode a packet into a encode_format
      * @param packet the origin message packet
@@ -45,15 +46,7 @@ namespace rlnc {
      * @param rand_list the random coefficient used to encode
      * @param vec_size the size of the msg
      */
-    void decode(char* packet, int length, char* buf, GFType* rand_list, int vec_size);
-
-    /*!
-     * test_print
-     * @param msg msg to print
-     */
-    void print(char* msg);
-
-    void print_mul();
+    void decode(char* packet, int length, char* buf, GFType** rand_list, int vec_size);
 }
 
 #endif //RLNC_CODEC_H

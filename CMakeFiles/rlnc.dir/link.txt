@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/rlnc.dir/main.cpp.o CMakeFiles/rlnc.dir/gf.cpp.o CMakeFiles/rlnc.dir/codec.cpp.o  -o rlnc 
+/usr/bin/c++  -g   CMakeFiles/rlnc.dir/main.cpp.o CMakeFiles/rlnc.dir/gf.cpp.o CMakeFiles/rlnc.dir/codec.cpp.o CMakeFiles/rlnc.dir/test_codec.cpp.o  -o rlnc 

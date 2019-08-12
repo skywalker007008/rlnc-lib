@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/buaa/CLionProjects/rlnc/codec.cpp" "/home/buaa/CLionProjects/rlnc/CMakeFiles/rlnc.dir/codec.cpp.o"
   "/home/buaa/CLionProjects/rlnc/gf.cpp" "/home/buaa/CLionProjects/rlnc/CMakeFiles/rlnc.dir/gf.cpp.o"
   "/home/buaa/CLionProjects/rlnc/main.cpp" "/home/buaa/CLionProjects/rlnc/CMakeFiles/rlnc.dir/main.cpp.o"
+  "/home/buaa/CLionProjects/rlnc/test_codec.cpp" "/home/buaa/CLionProjects/rlnc/CMakeFiles/rlnc.dir/test_codec.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
