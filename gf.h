@@ -66,6 +66,7 @@ GFType gf_exp(GFType a, GFType n);
 
 /*!
  * return a gauss_inv matrix by the certain random coef
+ * @ensures gf_list is full-trace
  * @param gf_list the rand_coef
  * @param vec_size the size of this vector_list
  * @return the inv matrix
@@ -74,6 +75,7 @@ GFType** gauss_inv(GFType** gf_list, int vec_size);
 
 /*!
  * Get the new encoding matrix
+ * @ensures both coef1 and coef2 are full-trace
  * @param coef1 first encoding coef
  * @param coef2 second encoding coef
  * @param vec_size the size of the coef-matrix

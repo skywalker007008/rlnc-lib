@@ -15,20 +15,47 @@
 #include "gf.h"
 
 #define RLNC rlnc::
+#define CODEC rlnc::Codec
 
 #define ROUND(a,b) ((a) + ((a) % (b)))
 #define HIGH_8(a) (((a) >> 8) & 0xFF)
 #define LOW_8(a) ((a) & 0xFF)
 
 namespace rlnc {
-    /*class Codec {
+    class Codec {
     public:
-        Codec();
+        Codec(int vec_size);
         ~Codec();
-        void set_message(char* message);
+        void RecvMessage(char* msg, GFType* coef);
 
-    };*/
+        bool LinkMsg();
+
+        GFType** encode();
+
+        void decode();
+
+        void get_encode_message(char* buf);
+
+        void get_decode_message(char* buf);
+
+    private:
+        bool _is_full;
+        bool _is_enough;
+        int _msg_num;
+        int _recv_num;
+        int _vec_size;
+        char* _raw_msg;
+        char* _encode_msg;
+        char* _decode_msg;
+
+        char* _cache_msg;
+
+        GFType** _coef_mat;
+        GFType** _cache_coef_mat;
+
+    };
     constexpr int kPacketSize = 64;
+    constexpr int kMaxBufSize = 16;
     /*!
      * Encode a packet into a encode_format
      * @param packet the origin message packet

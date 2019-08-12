@@ -170,10 +170,12 @@ GFType gf_exp(GFType a, GFType n)
 	return table_alpha[table_index[a]*n%(gFieldSize-1)];
 }
 
+// We have ensured gf_list is full-trace matrix
 GFType** gauss_inv(GFType** gf_list, int vec_size) {
     GFType** dest_mat = (GFType**)malloc(vec_size * sizeof(GFType*));
     GFType** orig_mat = (GFType**)malloc(vec_size * sizeof(GFType*));
     GFType temp;
+    GFType shift_temp;
     // TODO: Init a std matrix and copy the original matrix
     for (int i = 0; i < vec_size; i++) {
         dest_mat[i] = (GFType*)malloc(vec_size * sizeof(GFType));
@@ -193,7 +195,6 @@ GFType** gauss_inv(GFType** gf_list, int vec_size) {
         for (int j = 0; j < vec_size; j++) {
             dest_mat[i][j] = gf_div(dest_mat[i][j], temp);
             orig_mat[i][j] = gf_div(orig_mat[i][j], temp);
-
         }
         // RLNC print_mat(orig_mat, vec_size);
         // RLNC print_mat(dest_mat, vec_size);
