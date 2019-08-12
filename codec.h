@@ -63,7 +63,7 @@ namespace rlnc {
      * @param buf the buf to receive the encoded result
      * @return the random coefficient list
      */
-    GFType** encode(char* packet, int length, char* buf);
+    // GFType** encode(char* packet, int length, char* buf);
 
     /*!
      * Decode a packet into a decode_format
@@ -73,7 +73,7 @@ namespace rlnc {
      * @param rand_list the random coefficient used to encode
      * @param vec_size the size of the msg
      */
-    void decode(char* packet, int length, char* buf, GFType** rand_list, int vec_size);
+    // void decode(char* packet, int length, char* buf, GFType** rand_list, int vec_size);
 }
 
 #endif //RLNC_CODEC_H

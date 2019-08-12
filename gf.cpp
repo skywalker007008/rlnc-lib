@@ -230,14 +230,14 @@ GFType** gauss_inv(GFType** gf_list, int vec_size) {
     return dest_mat;
 }
 
-GFType** gf_newcoef(GFType** coef1, GFType** coef2, int vec_size) {
+GFType** gf_newcoef(GFType** coef_new, GFType** coef_old, int vec_size, int vec_x) {
     GFType** new_coef = (GFType**)malloc(vec_size * sizeof(GFType*));
     for (int i = 0; i < vec_size; i++) {
-        new_coef[i] = (GFType*)malloc(vec_size * sizeof(GFType));
-        memset(new_coef[i], 0, vec_size * sizeof(GFType));
-        for (int j = 0; j < vec_size; j++) {
+        new_coef[i] = (GFType*)malloc(vec_x * sizeof(GFType));
+        memset(new_coef[i], 0, vec_x * sizeof(GFType));
+        for (int j = 0; j < vec_x; j++) {
             for (int k = 0; k < vec_size; k++) {
-                new_coef[i][j] ^= gf_mul(coef1[i][k], coef2[k][j]);
+                new_coef[i][j] ^= gf_mul(coef_new[i][k], coef_old[k][j]);
             }
         }
     }

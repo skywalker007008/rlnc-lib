@@ -1,6 +1,7 @@
 #include <cstdint>
 
 #include "codec.h"
+#include "test_codec.h"
 
 /*
  * Copyright G410 Studio
@@ -46,7 +47,7 @@ void CODEC::RecvMessage(char* msg, GFType* coef) {
     memcpy((_cache_msg + _recv_num * kPacketSize), msg, kPacketSize * sizeof(char));
     memcpy(_cache_coef_mat[_recv_num], coef, _vec_size * sizeof(GFType));
     _recv_num++;
-    if (_recv_num == kPacketSize) {
+    if (_recv_num == kMaxBufSize) {
         _is_full = true;
     }
 }
@@ -124,16 +125,14 @@ void CODEC::get_decode_message(char* buf) {
 GFType** CODEC::encode() {
     GFType** rand_list = (GFType**)malloc(_vec_size * sizeof(GFType*));
     GFType rand;
-
+    memcpy(_raw_msg, _cache_msg, _recv_num * kPacketSize * sizeof(char));
     for (int i = 0; i < _recv_num; i++) {
         rand_list[i] = (GFType*)malloc(_recv_num * sizeof(GFType));
         for (int t = 0; t < _recv_num; t++) {
             rand = std::rand() % gFieldSize;
-            printf("rand: %x\n", rand);
             for (int j = 0; j < kPacketSize; j++) {
                 _encode_msg[i * kPacketSize + j] ^=
                         gf_mul(rand, (uint8_t) _raw_msg[t * kPacketSize + j]);
-                // printf("%x\n", (uint8_t) buf[i * kPacketSize + j]);
             }
             rand_list[i][t] = rand;
         }
@@ -142,15 +141,14 @@ GFType** CODEC::encode() {
 }
 
 void CODEC::decode() {
+    GFType** inv_mat = gauss_inv(_coef_mat, 2);
     GFType rand;
     for (int i = 0; i < _vec_size; i++) {
         for (int t = 0; t < _vec_size; t++) {
-            rand = _coef_mat[i][t];
-            printf("rand: %x\n", rand);
+            rand = inv_mat[i][t];
             for (int j = 0; j < kPacketSize; j++) {
                 _decode_msg[i * kPacketSize + j] ^=
                         gf_mul(rand, (uint8_t) _raw_msg[t * kPacketSize + j]);
-                // printf("%x\n", (uint8_t) buf[i * kPacketSize + j]);
             }
         }
     }
