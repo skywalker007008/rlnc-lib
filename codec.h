@@ -28,7 +28,7 @@ namespace rlnc {
         void set_message(char* message);
 
     };*/
-    constexpr int kPacketSize = 32;
+    constexpr int kPacketSize = 64;
     /*!
      * Encode a packet into a encode_format
      * @param packet the origin message packet

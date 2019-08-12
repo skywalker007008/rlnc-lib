@@ -19,7 +19,7 @@ GFType** RLNC encode(char* packet, int length, char* buf) {
         rand_list[i] = (GFType*)malloc(vec_size * sizeof(GFType));
         for (int t = 0; t < vec_size; t++) {
             rand = std::rand() % gFieldSize;
-            std::cout << "rand:" << rand << "\n";
+            printf("rand: %x\n", rand);
             for (int j = 0; j < kPacketSize; j++) {
                 buf[i * kPacketSize + j] ^= gf_mul(rand, (uint8_t) packet[t * kPacketSize + j]);
                 // printf("%x\n", (uint8_t) buf[i * kPacketSize + j]);
@@ -36,7 +36,7 @@ void RLNC decode(char* packet, int length, char* buf, GFType** rand_list, int ve
     for (int i = 0; i < vec_size; i++) {
         for (int t = 0; t < vec_size; t++) {
             rand = rand_list[i][t];
-            std::cout << "rand:" << rand << "\n";
+            printf("rand: %x\n", rand);
             for (int j = 0; j < kPacketSize; j++) {
                 buf[i * kPacketSize + j] ^= gf_mul(rand, (uint8_t) packet[t * kPacketSize + j]);
                 // printf("%x\n", (uint8_t) buf[i * kPacketSize + j]);

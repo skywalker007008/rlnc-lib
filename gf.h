@@ -72,6 +72,15 @@ GFType gf_exp(GFType a, GFType n);
  */
 GFType** gauss_inv(GFType** gf_list, int vec_size);
 
+/*!
+ * Get the new encoding matrix
+ * @param coef1 first encoding coef
+ * @param coef2 second encoding coef
+ * @param vec_size the size of the coef-matrix
+ * @return the new encoding coef matrix
+ */
+GFType** gf_newcoef(GFType** coef1, GFType** coef2, int vec_size);
+
 #ifdef _cplusplus
 }	
 #endif

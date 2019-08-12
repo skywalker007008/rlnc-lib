@@ -9,9 +9,9 @@
 
 void RLNC print(char* msg) {
     int len = strlen(msg);
-    for (int i = 0; i < len / 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            printf("%x ", (uint8_t)msg[i * 4 + j]);
+    for (int i = 0; i < len / 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            printf("%x ", (uint8_t)msg[i * 8 + j]);
         }
         std::cout << "\n";
     }
