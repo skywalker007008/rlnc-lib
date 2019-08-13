@@ -1,7 +1,7 @@
 /*
  * Copyright G410 Studio
  * Author: Skywalker007008, Liu Zihao
- * Github Link: https://github.com/skywalker007008/marvelCoding
+ * Github Link: https://github.com/skywalker007008/rlnc-lib
  * 
  */
 
@@ -61,10 +61,11 @@ void RLNC test_rlnc() {
     char packet[128] = "This is the test code. "
             "And encode and decode this message to test the result right or not";
     RLNC print(packet);
+    int packet_size = 64;
 
-    CODEC codec(2);
+    CODEC codec(2, packet_size);
     codec.RecvMessage(packet, std_coef[0]);
-    codec.RecvMessage(packet + RLNC kPacketSize, std_coef[1]);
+    codec.RecvMessage(packet + packet_size, std_coef[1]);
     rand1 = codec.encode();
     RLNC print_mat(rand1, 2);
     // rand1 = gf_newcoef(rand1, std_coef, 2, 2);
@@ -72,9 +73,9 @@ void RLNC test_rlnc() {
     codec.get_encode_message(encode_buf1);
     std::cout << "Encode1 Finished\n";
 
-    CODEC codec2(2);
+    CODEC codec2(2, packet_size);
     codec2.RecvMessage(encode_buf1, rand1[0]);
-    codec2.RecvMessage(encode_buf1 + RLNC kPacketSize, rand1[1]);
+    codec2.RecvMessage(encode_buf1 + packet_size, rand1[1]);
     rand2 = codec2.encode();
     RLNC print_mat(rand2, 2);
     // rand2 = gf_newcoef(rand2, rand1, 2, 2);
@@ -82,9 +83,9 @@ void RLNC test_rlnc() {
     codec2.get_encode_message(encode_buf2);
     std::cout << "Encode2 Finished\n";
 
-    CODEC codec3(2);
+    CODEC codec3(2, packet_size);
     codec3.RecvMessage(encode_buf2, rand2[0]);
-    codec3.RecvMessage(encode_buf2 + RLNC kPacketSize, rand2[1]);
+    codec3.RecvMessage(encode_buf2 + packet_size, rand2[1]);
     if (codec3.LinkMsg()) {
         std::cout << "Link Finished\n";
         codec3.decode();

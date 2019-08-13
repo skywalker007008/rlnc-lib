@@ -29,7 +29,6 @@ http://www.sensor608.com/gf.html
 
 #include "gf.h"
 #include "stdio.h"
-#include <stdlib.h> 
 #include <malloc.h>
 #include "test_codec.h"
 
