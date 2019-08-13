@@ -124,6 +124,8 @@ namespace rlnc {
      * Init the std_coef
      */
     void coef_init();
+
+    void init(unsigned int m);
 }
 
 #endif //RLNC_CODEC_H

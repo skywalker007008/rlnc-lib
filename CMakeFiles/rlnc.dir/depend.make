@@ -4,7 +4,6 @@
 CMakeFiles/rlnc.dir/codec.cpp.o: codec.cpp
 CMakeFiles/rlnc.dir/codec.cpp.o: codec.h
 CMakeFiles/rlnc.dir/codec.cpp.o: gf.h
-CMakeFiles/rlnc.dir/codec.cpp.o: test_codec.h
 
 CMakeFiles/rlnc.dir/gf.cpp.o: codec.h
 CMakeFiles/rlnc.dir/gf.cpp.o: gf.cpp

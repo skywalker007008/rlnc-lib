@@ -11,8 +11,6 @@ cstdint
 -
 codec.h
 /home/buaa/CLionProjects/rlnc/codec.h
-test_codec.h
-/home/buaa/CLionProjects/rlnc/test_codec.h
 
 /home/buaa/CLionProjects/rlnc/codec.h
 malloc.h
@@ -31,8 +29,6 @@ gf.h
 /home/buaa/CLionProjects/rlnc/gf.h
 stdio.h
 /home/buaa/CLionProjects/rlnc/stdio.h
-stdlib.h
--
 malloc.h
 -
 test_codec.h

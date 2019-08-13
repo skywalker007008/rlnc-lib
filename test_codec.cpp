@@ -47,7 +47,7 @@ void RLNC print_mat(GFType** mat, int vec_size) {
     }
 }
 
-void RLNC test_rlnc() {
+void RLNC test_encode_decode() {
     // TODO: Init
     GFType** rand1;
     GFType** rand2;
@@ -56,8 +56,6 @@ void RLNC test_rlnc() {
     char* encode_buf3 = (char*)malloc(128 * sizeof(char));
     char* decode_buf = (char*)malloc(128 * sizeof(char));
 
-    gf_init(8, prim_poly[8]);
-    coef_init();
     char packet[128] = "This is the test code. "
             "And encode and decode this message to test the result right or not";
     RLNC print(packet);

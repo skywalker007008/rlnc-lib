@@ -21,7 +21,7 @@ namespace rlnc {
 
     void print_mat(GFType** mat, int vec_size);
 
-    void test_rlnc();
+    void test_encode_decode();
 }
 
 #endif //RLNC_TEST_CODEC_H

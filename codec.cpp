@@ -175,4 +175,9 @@ void RLNC coef_init() {
     }
 }
 
+void RLNC init(unsigned int m) {
+    gf_init(m, prim_poly[m]);
+    coef_init();
+}
+
 

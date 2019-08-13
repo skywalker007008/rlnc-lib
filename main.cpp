@@ -3,5 +3,6 @@
 #include "test_codec.h"
 
 int main() {
-    RLNC test_rlnc();
+    RLNC init(8);
+    RLNC test_encode_decode();
 }
