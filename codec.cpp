@@ -80,7 +80,7 @@ bool CODEC::LinkMsg() {
         // if [i][i] == 0, needs shift
         if (temp == 0) {
             // TODO: Find a row j while [j][i] != 0
-            for (int j = i; j < _recv_num; i++) {
+            for (int j = i; j < _recv_num; j++) {
                 if (orig_mat[j][i] != 0) {
                     // TODO: Shift the 2 lines
                     for (int k = 0; k < _vec_size; k++) {

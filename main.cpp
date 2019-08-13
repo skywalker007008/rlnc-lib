@@ -4,5 +4,6 @@
 
 int main() {
     RLNC init(8);
-    RLNC test_encode_decode();
+    // RLNC test_encode_decode();
+    RLNC test_link();
 }

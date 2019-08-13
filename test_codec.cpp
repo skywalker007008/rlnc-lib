@@ -108,3 +108,44 @@ void RLNC test_encode_decode() {
     free(encode_buf2);
     free(encode_buf3);
 }
+
+void RLNC test_link() {
+    char packet1[128] = "This is the test code. "
+            "And encode and decode this message to test the result right or not";
+    char* packet2 = (char*)malloc(128 * sizeof(char));
+
+    char packet3[128] = "We are glad to see the result is right. "
+            "But there are also some annoying bug here.";
+    char* buf1 = (char*)malloc(256 * sizeof(char));
+    char* buf2 = (char*)malloc(256 * sizeof(char));
+    memcpy(packet2, packet1, 128);
+    GFType** coef = (GFType**)malloc(2 * sizeof(GFType*));
+    coef[0] = (GFType*)malloc(2 * sizeof(GFType));
+
+    CODEC* temp_codec = new CODEC(2, 128);
+    temp_codec -> RecvMessage(packet1, std_coef[0]);
+    temp_codec -> RecvMessage(packet3, std_coef[1]);
+    coef = temp_codec -> encode();
+
+    temp_codec -> get_encode_message(buf1);
+    printf("Original Data\n");
+    RLNC print(packet1);
+    RLNC print(packet3);
+
+    CODEC codec(2, 128);
+    codec.RecvMessage(packet1, std_coef[0]);
+    codec.RecvMessage(packet2, std_coef[0]);
+    codec.RecvMessage(buf1, coef[0]);
+
+    if (codec.LinkMsg()) {
+        printf("Link Succeeds\n");
+        codec.decode();
+        codec.get_decode_message(buf2);
+    } else {
+        printf("Link Failed\n");
+    }
+
+    printf("Decode Data\n");
+    RLNC print(buf2);
+    RLNC print(buf2 + 128);
+}
