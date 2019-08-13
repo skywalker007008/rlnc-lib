@@ -9,6 +9,8 @@
  * Github Link: https://github.com/skywalker007008/marvelCoding
  * 
  */
+GFType** std_coef;
+
 CODEC::Codec(int vec_size) :
         _vec_size(vec_size), _recv_num(0), _is_enough(false), _is_full(false) {
     _coef_mat = (GFType**)malloc(_vec_size * sizeof(GFType*));
@@ -137,6 +139,7 @@ GFType** CODEC::encode() {
             rand_list[i][t] = rand;
         }
     }
+    rand_list = gf_newcoef(rand_list, _cache_coef_mat, _recv_num, _vec_size);
     return rand_list;
 }
 
@@ -153,4 +156,15 @@ void CODEC::decode() {
         }
     }
 }
+
+void RLNC coef_init() {
+    std_coef = (GFType**)malloc(kMaxPartNum * sizeof(GFType*));
+    for (int i = 0; i < kMaxPartNum; i++) {
+        std_coef[i] = (GFType*)malloc(kMaxPartNum * sizeof(GFType));
+        for (int j = 0; j < kMaxPartNum; j++) {
+            std_coef[i][j] = ((i == j) ? (GFType)1 : (GFType)0);
+        }
+    }
+}
+
 

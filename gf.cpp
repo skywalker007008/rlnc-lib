@@ -244,3 +244,4 @@ GFType** gf_newcoef(GFType** coef_new, GFType** coef_old, int vec_size, int vec_
     return new_coef;
 }
 
+

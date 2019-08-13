@@ -17,9 +17,7 @@
 #define RLNC rlnc::
 #define CODEC rlnc::Codec
 
-#define ROUND(a,b) ((a) + ((a) % (b)))
-#define HIGH_8(a) (((a) >> 8) & 0xFF)
-#define LOW_8(a) ((a) & 0xFF)
+extern GFType** std_coef;
 
 namespace rlnc {
     class Codec {
@@ -56,6 +54,9 @@ namespace rlnc {
     };
     constexpr int kPacketSize = 64;
     constexpr int kMaxBufSize = 16;
+    constexpr int kMaxPartNum = 16;
+
+    void coef_init();
     /*!
      * Encode a packet into a encode_format
      * @param packet the origin message packet

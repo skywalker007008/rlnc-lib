@@ -46,3 +46,66 @@ void RLNC print_mat(GFType** mat, int vec_size) {
         printf("\n");
     }
 }
+
+void RLNC test_rlnc() {
+    // TODO: Init
+    GFType** rand1;
+    GFType** rand2;
+    char* encode_buf1 = (char*)malloc(128 * sizeof(char));
+    char* encode_buf2 = (char*)malloc(128 * sizeof(char));
+    char* encode_buf3 = (char*)malloc(128 * sizeof(char));
+    char* decode_buf = (char*)malloc(128 * sizeof(char));
+
+    gf_init(8, prim_poly[8]);
+    coef_init();
+    char packet[128] = "This is the test code. "
+            "And encode and decode this message to test the result right or not";
+    RLNC print(packet);
+
+    CODEC codec(2);
+    codec.RecvMessage(packet, std_coef[0]);
+    codec.RecvMessage(packet + RLNC kPacketSize, std_coef[1]);
+    rand1 = codec.encode();
+    RLNC print_mat(rand1, 2);
+    // rand1 = gf_newcoef(rand1, std_coef, 2, 2);
+    // RLNC print_mat(rand1, 2);
+    codec.get_encode_message(encode_buf1);
+    std::cout << "Encode1 Finished\n";
+
+    CODEC codec2(2);
+    codec2.RecvMessage(encode_buf1, rand1[0]);
+    codec2.RecvMessage(encode_buf1 + RLNC kPacketSize, rand1[1]);
+    rand2 = codec2.encode();
+    RLNC print_mat(rand2, 2);
+    // rand2 = gf_newcoef(rand2, rand1, 2, 2);
+    // RLNC print_mat(rand2, 2);
+    codec2.get_encode_message(encode_buf2);
+    std::cout << "Encode2 Finished\n";
+
+    CODEC codec3(2);
+    codec3.RecvMessage(encode_buf2, rand2[0]);
+    codec3.RecvMessage(encode_buf2 + RLNC kPacketSize, rand2[1]);
+    if (codec3.LinkMsg()) {
+        std::cout << "Link Finished\n";
+        codec3.decode();
+        codec3.get_decode_message(decode_buf);
+        std::cout << "Decode Finished\n";
+        RLNC print(decode_buf);
+    }
+
+    GFType a = gf_add(gf_mul(0xbd, 0xf1), gf_mul(0x24, 0x6b));
+    GFType b = gf_add(gf_mul(0xbd, 0xd3), gf_mul(0x24, 0xc4));
+    GFType c = gf_add(gf_mul(0x79, 0xf1), gf_mul(0xa3, 0x6b));
+    GFType d = gf_add(gf_mul(0x79, 0xd3), gf_mul(0xa3, 0xc4));
+
+    GFType e = gf_div(0xde, 0x1a);
+    printf("%x %x %x %x\n", a, b, c, d);
+
+
+    // printf("%x\n", e);
+
+    // RLNC print_mul();
+    free(encode_buf1);
+    free(encode_buf2);
+    free(encode_buf3);
+}
