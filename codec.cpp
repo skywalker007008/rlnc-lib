@@ -9,7 +9,7 @@
  * 
  */
 GFType** std_coef;
-
+GFType** rand_static;
 CODEC::Codec(int vec_size, int packet_size) :
         _vec_size(vec_size), _recv_num(0), _packet_size(packet_size),
         _is_enough(false), _is_full(false) {
@@ -139,7 +139,8 @@ GFType** CODEC::encode() {
     for (int i = 0; i < _recv_num; i++) {
         rand_list[i] = (GFType*)malloc(_recv_num * sizeof(GFType));
         for (int t = 0; t < _recv_num; t++) {
-            rand = std::rand() % gFieldSize;
+            // rand = std::rand() % gFieldSize;
+            rand = rand_static[i][t];
             for (int j = 0; j < _packet_size; j++) {
                 _encode_msg[i * _packet_size + j] ^=
                         gf_mul(rand, (uint8_t) _raw_msg[t * _packet_size + j]);
@@ -173,6 +174,15 @@ void RLNC coef_init() {
             std_coef[i][j] = ((i == j) ? (GFType)1 : (GFType)0);
         }
     }
+
+    rand_static = (GFType**)malloc(2 * sizeof(GFType*));
+    rand_static[0] = (GFType*)malloc(2 * sizeof(GFType));
+    rand_static[1] = (GFType*)malloc(2 * sizeof(GFType));
+
+    rand_static[0][0] = 0x29;
+    rand_static[0][1] = 0x23;
+    rand_static[1][0] = 0xbe;
+    rand_static[1][1] = 0x84;
 }
 
 void RLNC init(unsigned int m) {

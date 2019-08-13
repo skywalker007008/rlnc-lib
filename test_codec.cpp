@@ -9,9 +9,9 @@
 
 void RLNC print(char* msg) {
     int len = strlen(msg);
-    for (int i = 0; i < len / 8; i++) {
+    for (int i = 0; i < (len + 1) / 8; i++) {
         for (int j = 0; j < 8; j++) {
-            printf("%x ", (uint8_t)msg[i * 8 + j]);
+            printf("%x ", (uint8_t )msg[i * 8 + j]);
         }
         std::cout << "\n";
     }
@@ -51,13 +51,16 @@ void RLNC test_encode_decode() {
     // TODO: Init
     GFType** rand1;
     GFType** rand2;
-    char* encode_buf1 = (char*)malloc(128 * sizeof(char));
+    char* encode_buf1 = (char*)malloc(256 * sizeof(char));
     char* encode_buf2 = (char*)malloc(128 * sizeof(char));
-    char* encode_buf3 = (char*)malloc(128 * sizeof(char));
+    char* encode_buf3 = (char*)malloc(64 * sizeof(char));
+    char* encode_buf4 = (char*)malloc(64 * sizeof(char));
     char* decode_buf = (char*)malloc(128 * sizeof(char));
 
-    char packet[128] = "This is the test code. "
+    // char packet[128] = "This is the test code. "
             "And encode and decode this message to test the result right or not";
+    char packet[128] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     RLNC print(packet);
     int packet_size = 64;
 
@@ -65,25 +68,39 @@ void RLNC test_encode_decode() {
     codec.RecvMessage(packet, std_coef[0]);
     codec.RecvMessage(packet + packet_size, std_coef[1]);
     rand1 = codec.encode();
-    RLNC print_mat(rand1, 2);
+    // RLNC print_mat(rand1, 2);
     // rand1 = gf_newcoef(rand1, std_coef, 2, 2);
     // RLNC print_mat(rand1, 2);
     codec.get_encode_message(encode_buf1);
+
     std::cout << "Encode1 Finished\n";
+    RLNC print(encode_buf1);
+
+    printf("\n");
 
     CODEC codec2(2, packet_size);
     codec2.RecvMessage(encode_buf1, rand1[0]);
+    memcpy(encode_buf3, encode_buf1, 64);
+    print(encode_buf3);
+    printf("\n");
     codec2.RecvMessage(encode_buf1 + packet_size, rand1[1]);
-    rand2 = codec2.encode();
-    RLNC print_mat(rand2, 2);
+    memcpy(encode_buf4, encode_buf1 + 64, 64);
+    print(encode_buf4);
+    printf("\n");
+    /*rand2 = codec2.encode();
+    // RLNC print_mat(rand2, 2);
     // rand2 = gf_newcoef(rand2, rand1, 2, 2);
     // RLNC print_mat(rand2, 2);
     codec2.get_encode_message(encode_buf2);
+
     std::cout << "Encode2 Finished\n";
+    RLNC print(encode_buf2);*/
+
+
 
     CODEC codec3(2, packet_size);
-    codec3.RecvMessage(encode_buf2, rand2[0]);
-    codec3.RecvMessage(encode_buf2 + packet_size, rand2[1]);
+    codec3.RecvMessage(encode_buf3, rand1[0]);
+    codec3.RecvMessage(encode_buf4, rand1[1]);
     if (codec3.LinkMsg()) {
         std::cout << "Link Finished\n";
         codec3.decode();
